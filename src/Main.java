@@ -2,13 +2,7 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        // I'm not sure whether by factory we mean physical factory or factory design patten
-        // Here I assumed the first, if it was a factory design pattern the only thing we need
-        // to change is instead of using the new keyword we just write CarFactory.createCar("Gas") for example
-        /// and inside the car factory class we check (using if or switch) for the passed parameter
-
-        Car carWithGasEngine = new Car(new GasEngine(1, 1, -100, 200),
-                20, 20);
+        Car carWithGasEngine = CarFactory.createCar(EngineType.GAS);
 
         carWithGasEngine.start();
         System.out.println("Initial speed: " + carWithGasEngine.getCurrentSpeed());
@@ -20,13 +14,7 @@ public class Main {
         System.out.println("Speed after 21 accelerations: " + carWithGasEngine.getCurrentSpeed());
 
 
-
-        HybridEngine gasElectricHybridEngine = new HybridEngine(
-                new EngineBasedOnSpeed(new ElectricEngine(1, 1, -50, 100),
-                        new GasEngine(1, 1, -100, 200), 50)
-        );
-
-        Car carWithHybridEngine = new Car(gasElectricHybridEngine, 20, 20);
+        Car carWithHybridEngine = CarFactory.createCar(EngineType.HYBRID);
         carWithHybridEngine.start();
         carWithHybridEngine.accelerate();
         carWithHybridEngine.accelerate();
